@@ -1,29 +1,111 @@
-import { View, Text, StyleSheet, Image, TextInput } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native'
+import React, { useRef, useEffect, useState } from 'react'
 import imagesPath from '@/src/constants/imagesPath'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import ButtonComp from '@/src/components/ButtonComp'
+import { router } from 'expo-router'
+import { useToast } from "react-native-toast-notifications";
 
-const VerifyOtp = ({ phoneNumber }: any) => {
+const VerifyOtp = () => {
+
+    const [time, setTime] = useState(60);
+    const timerRef = useRef(time);
+
+    useEffect(() => {
+        const timerId = setInterval(() => {
+            timerRef.current -= 1;
+            if (timerRef.current < 0) {
+                clearInterval(timerId);
+            } else {
+                setTime(timerRef.current);
+            }
+        }, 1000);
+        return () => {
+            clearInterval(timerId);
+        };
+    }, []);
+
+    const navigateLogin = () => {
+        router.push("/(auth)/login")
+    }
+
+    const [resendCode, setResendCode] = useState(60)
+    const resendRef = useRef(resendCode);
+
+    const [showResend, setShowResend] = useState(false)
+
+    const [showTime, setShowTime] = useState(true)
+
+    const resendCodeAgain = () => {
+        const timerResend = setInterval(() => {
+            resendRef.current -= 1;
+            if (resendRef.current < 0) {
+                clearInterval(timerResend);
+            } else {
+                setResendCode(resendRef.current);
+            }
+        }, 1000);
+        return () => {
+            clearInterval(timerResend);
+        };
+    }
+
+    // useEffect(() => {
+    //     resendCodeAgain()
+    // }, [])
+
+    const [verifyBtnStyle, setVerifyBtnStyle] = useState("rgba(0,0,0,0.44)")
+
+    const [OtpText, setOtpText] = useState("")
+
+    // toast
+    const toast = useToast();
+
+    const showToast = () => {
+        let TestOtpCode = "4789"
+        if (OtpText !== TestOtpCode) {
+            toast.show("Invalid password", {
+                type: "danger",
+                placement: "bottom",
+                animationType: "slide-in",
+            });
+        }
+    }
+
+
+
+
+
     return (
         <View style={styles.container_main}>
             <View style={styles.header}>
-                <Image source={imagesPath.back_arrow} resizeMode='contain' style={styles.back_icon} />
+                <TouchableOpacity activeOpacity={0.8} onPress={navigateLogin}>
+                    <Image source={imagesPath.back_arrow} resizeMode='contain' style={styles.back_icon} />
+                </TouchableOpacity>
                 <Text style={styles.enter_text}>Enter OTP Code</Text>
             </View>
             <View style={styles.container_mid}>
                 <View style={styles.body}>
-                    <Text style={styles.info_text}>Code has been send to {phoneNumber}</Text>
+                    <Text style={styles.info_text}>Code has been send to +91 11******44</Text>
                     <View style={styles.inputcode_container}>
                         {[1, 2, 3, 4].map((item, index) =>
                             <View key={index}>
-                                <TextInput keyboardType='numeric' maxLength={1} style={styles.input_code} />
+                                <TextInput keyboardType='numeric' maxLength={1} style={styles.input_code} onChangeText={(e) => { setVerifyBtnStyle("#000"); setOtpText(e) }} />
                             </View>)}
                     </View>
-                    <Text style={styles.resend_text}>Resend Code in <Text style={styles.seconds_text}>56</Text> s</Text>
+                    {showTime && time > 0 ?
+                        <Text style={styles.resend_text}>Resend Code in <Text style={styles.seconds_text}>{time}</Text> s</Text>
+                        :
+                        <TouchableOpacity activeOpacity={0.8} onPress={() => { resendCodeAgain(); setShowResend(true); setShowTime(false) }}>
+                            {showResend && resendCode > 0 ?
+                                <Text style={styles.resend_text}>Resend Code in <Text style={styles.seconds_text}>{resendCode}</Text> s</Text>
+                                : <Text style={styles.resend_again}>Resend Code</Text>
+                            }
+                        </TouchableOpacity>
+                    }
                 </View>
                 <View style={styles.footer}>
-                    <ButtonComp title="Verify" style={styles.verify_btn} />
+                    <ButtonComp title="Verify" style={[OtpText === "" ? styles.disable_verifybtn : styles.verify_btn]} onPress={showToast} />
                 </View>
             </View>
         </View>
@@ -75,6 +157,13 @@ const styles = StyleSheet.create({
         paddingVertical: moderateScale(15),
         marginBottom: moderateScale(15),
     },
+    disable_verifybtn: {
+        width: scale(300),
+        backgroundColor: "rgba(0,0,0,0.44)",
+        borderRadius: moderateScale(25),
+        paddingVertical: moderateScale(15),
+        marginBottom: moderateScale(15),
+    },
     input_code: {
         borderBlockColor: "#000",
         height: verticalScale(68),
@@ -94,7 +183,11 @@ const styles = StyleSheet.create({
     },
     seconds_text: {
         color: "#00A884"
-    }
+    },
+    resend_again: {
+        marginTop: moderateScale(57),
+        color: "#00A884",
+    },
 })
 
 export default VerifyOtp

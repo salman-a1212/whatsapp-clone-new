@@ -3,6 +3,8 @@ import { Redirect, Stack } from 'expo-router'
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold, useFonts } from '@expo-google-fonts/roboto';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { ToastProvider } from 'react-native-toast-notifications'
+import imagesPath from '../constants/imagesPath';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -29,9 +31,11 @@ const RootLayout = () => {
 
     return (
         <>
-            <Stack screenOptions={{ headerShown: false }} />
-            {isLogin ? <Redirect href={"/(main)"} />
-                : <Redirect href={"/(auth)"} />}
+            <ToastProvider dangerColor='#F8DADA' textStyle={{ color: "#DA1414" }}>
+                <Stack screenOptions={{ headerShown: false }} />
+                {isLogin ? <Redirect href={"/(main)"} />
+                    : <Redirect href={"/(auth)"} />}
+            </ToastProvider>
         </>
     )
 }

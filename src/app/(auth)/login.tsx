@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, ActivityIndicator, Modal } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import imagesPath from '@/src/constants/imagesPath';
 import { Menu, MenuItem } from 'react-native-material-menu';
@@ -20,6 +20,7 @@ const Login = () => {
     const [countryCode, setCountryCode] = useState("")
 
     const [phoneNumber, setPhoneNumber] = useState("")
+
 
     function handleSelection(e) {
         console.log(e);
@@ -52,6 +53,10 @@ const Login = () => {
             clearTimeout(timeout)
         }
     }, [])
+
+    console.log(phoneNumber)
+
+
 
     return (
         <View style={styles.container}>
@@ -265,4 +270,3 @@ const styles = StyleSheet.create({
 })
 
 export default Login
-export const phoneNumber = { phoneNumber }
