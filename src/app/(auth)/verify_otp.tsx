@@ -60,18 +60,21 @@ const VerifyOtp = () => {
 
     // toast
     const toast = useToast();
+    let TestOtpCode = "4789"
 
     const showToast = () => {
-        let TestOtpCode = "4789"
-        if (OtpText !== TestOtpCode) {
+        if (OtpText !== TestOtpCode && OtpText !== "") {
             toast.show("Invalid password", {
                 type: "danger",
                 placement: "bottom",
                 animationType: "slide-in",
             });
+        } else {
+            console.log(OtpText !== TestOtpCode)
+            toast.hideAll();
         }
     }
-
+    console.log(OtpText !== TestOtpCode)
 
 
 
