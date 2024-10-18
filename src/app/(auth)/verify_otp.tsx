@@ -1,12 +1,12 @@
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, Modal, ActivityIndicator } from 'react-native'
 import React, { useRef, useEffect, useState } from 'react'
 import imagesPath from '@/src/constants/imagesPath'
 import { moderateScale, scale, verticalScale } from 'react-native-size-matters'
 import ButtonComp from '@/src/components/ButtonComp'
 import { router } from 'expo-router'
-import { useToast } from "react-native-toast-notifications";
 
 const VerifyOtp = () => {
+
 
     const [time, setTime] = useState(60);
     const timerRef = useRef(time);
@@ -56,28 +56,50 @@ const VerifyOtp = () => {
 
     const [verifyBtnStyle, setVerifyBtnStyle] = useState("rgba(0,0,0,0.44)")
 
-    const [OtpText, setOtpText] = useState("")
+    const [OtpText, setOtpText] = useState([""])
 
-    // toast
-    const toast = useToast();
+    const [wrongCode, setwrongCode] = useState(false)
+
     let TestOtpCode = "4789"
 
     const showToast = () => {
-        if (OtpText !== TestOtpCode && OtpText !== "") {
-            toast.show("Invalid password", {
-                type: "danger",
-                placement: "bottom",
-                animationType: "slide-in",
-            });
+        if (OtpText.join("") !== TestOtpCode && OtpText.join("") !== "") {
+            setwrongCode(true)
         } else {
-            console.log(OtpText !== TestOtpCode)
-            toast.hideAll();
+            setwrongCode(false)
         }
     }
-    console.log(OtpText !== TestOtpCode)
+    console.log(OtpText === TestOtpCode.split(""))
+    console.log(OtpText !== TestOtpCode.split(""))
+    console.log(OtpText);
+    console.log(TestOtpCode.split(""));
+    console.log(OtpText.join(""));
+    console.log(TestOtpCode);
 
+    // modal
+    const [modalVisible, setModalVisible] = useState(false);
 
+    const navigateMain = () => {
+        if (OtpText.join("") === TestOtpCode && OtpText.join("") !== "") {
+            router.push("/(main)/")
+        }
+    }
 
+    const modalTimer = () => {
+        if (OtpText.join("") === TestOtpCode && OtpText.join("") !== "") {
+            setModalVisible(true)
+            setTimeout(navigateMain, 3000)
+        } else {
+            setModalVisible(false)
+        }
+    }
+
+    useEffect(() => {
+        const timeout = setTimeout(modalTimer, 3000);
+        return () => {
+            clearTimeout(timeout)
+        }
+    }, [])
 
     return (
         <View style={styles.container_main}>
@@ -93,9 +115,17 @@ const VerifyOtp = () => {
                     <View style={styles.inputcode_container}>
                         {[1, 2, 3, 4].map((item, index) =>
                             <View key={index}>
-                                <TextInput keyboardType='numeric' maxLength={1} style={styles.input_code} onChangeText={(e) => { setVerifyBtnStyle("#000"); setOtpText(e) }} />
+                                <TextInput keyboardType='numeric' maxLength={1} style={styles.input_code} onChangeText={(e) => { setVerifyBtnStyle("#000"); setOtpText((prev) => [...prev, e]); }} />
                             </View>)}
+
                     </View>
+                    {wrongCode ?
+                        <View style={styles.wrongcode_container}>
+                            <Text style={styles.wrongcode_text}><Image source={imagesPath.error_icon} resizeMode='contain' /> Invalid password</Text>
+                        </View>
+                        :
+                        ""
+                    }
                     {showTime && time > 0 ?
                         <Text style={styles.resend_text}>Resend Code in <Text style={styles.seconds_text}>{time}</Text> s</Text>
                         :
@@ -108,7 +138,24 @@ const VerifyOtp = () => {
                     }
                 </View>
                 <View style={styles.footer}>
-                    <ButtonComp title="Verify" style={[OtpText === "" ? styles.disable_verifybtn : styles.verify_btn]} onPress={showToast} />
+                    <ButtonComp title="Verify" style={[OtpText.join("") === "" ? styles.disable_verifybtn : styles.verify_btn]} onPress={showToast} />
+                    {/* modal */}
+                    <View style={styles.centeredView}>
+                        <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={modalVisible}
+                            onDismiss={modalTimer}
+                            onRequestClose={() => {
+                                modalTimer;
+                            }}>
+                            <View style={styles.centeredView}>
+                                <View style={styles.modalView}>
+                                    <ActivityIndicator size="large" color="#00F2AA" />
+                                </View>
+                            </View>
+                        </Modal>
+                    </View>
                 </View>
             </View>
         </View>
@@ -191,6 +238,42 @@ const styles = StyleSheet.create({
         marginTop: moderateScale(57),
         color: "#00A884",
     },
+    wrongcode_container: {
+        width: scale(300),
+        marginTop: verticalScale(22),
+        backgroundColor: "#F8DADA",
+        paddingVertical: verticalScale(10),
+        borderRadius: moderateScale(25),
+    },
+    wrongcode_text: {
+        color: "#DA1414",
+        paddingStart: moderateScale(10),
+    },
+    // modal
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+        backgroundColor: '#535861',
+        opacity: 0.72,
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+
 })
 
 export default VerifyOtp

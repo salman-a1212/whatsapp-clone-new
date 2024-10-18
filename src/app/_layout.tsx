@@ -31,11 +31,9 @@ const RootLayout = () => {
 
     return (
         <>
-            <ToastProvider dangerColor='#F8DADA' textStyle={{ color: "#DA1414" }}>
-                <Stack screenOptions={{ headerShown: false }} />
-                {isLogin ? <Redirect href={"/(main)"} />
-                    : <Redirect href={"/(auth)"} />}
-            </ToastProvider>
+            <Stack screenOptions={{ headerShown: false }} />
+            {isLogin ? <Redirect href={"/(main)"} />
+                : <Redirect href={"/(auth)"} />}
         </>
     )
 }
