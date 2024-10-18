@@ -138,7 +138,7 @@ const VerifyOtp = () => {
                     }
                 </View>
                 <View style={styles.footer}>
-                    <ButtonComp title="Verify" style={[OtpText.join("") === "" ? styles.disable_verifybtn : styles.verify_btn]} onPress={showToast} />
+                    <ButtonComp title="Verify" style={[OtpText.join("") === "" ? styles.disable_verifybtn : styles.verify_btn]} onPress={() => { showToast(); modalTimer() }} />
                     {/* modal */}
                     <View style={styles.centeredView}>
                         <Modal
