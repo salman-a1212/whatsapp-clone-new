@@ -22,7 +22,7 @@ const Login = () => {
     const [phoneNumber, setPhoneNumber] = useState("")
 
 
-    function handleSelection(e) {
+    function handleSelection(e: any) {
         console.log(e);
         setCountryCode(e.country)
     }

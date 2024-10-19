@@ -3,8 +3,6 @@ import { Redirect, Stack } from 'expo-router'
 import { Roboto_400Regular, Roboto_500Medium, Roboto_700Bold, useFonts } from '@expo-google-fonts/roboto';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import { ToastProvider } from 'react-native-toast-notifications'
-import imagesPath from '../constants/imagesPath';
 
 SplashScreen.preventAutoHideAsync();
 
