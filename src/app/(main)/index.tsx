@@ -7,6 +7,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import imagesPath from '@/src/constants/imagesPath';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const Main = () => {
@@ -17,18 +18,22 @@ const Main = () => {
 
     const showMenu = () => setVisible(true);
 
-    const image = { uri: 'https://legacy.reactjs.org/logo-og.png' };
-
     const FirstRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff' }} />
+        <View style={{ flex: 1, backgroundColor: '#fff' }}>
+            <ImageBackground source={imagesPath.chat_bg} resizeMode="cover" style={styles.image}></ImageBackground>
+        </View>
     );
 
     const SecondRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff' }} />
+        <View style={{ flex: 1, backgroundColor: '#fff' }}>
+            <ImageBackground source={imagesPath.chat_bg} resizeMode="cover" style={styles.image}></ImageBackground>
+        </View>
     );
 
     const ThirdRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff' }} />
+        <View style={{ flex: 1, backgroundColor: '#fff' }}>
+            <ImageBackground source={imagesPath.chat_bg} resizeMode="cover" style={styles.image}></ImageBackground>
+        </View>
     );
 
 
@@ -84,7 +89,7 @@ const Main = () => {
     ]);
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <TabView
                 navigationState={{ index, routes }}
                 renderScene={renderScene}
@@ -92,29 +97,26 @@ const Main = () => {
                 initialLayout={{ width: layout.width }}
                 renderTabBar={renderTabBar}
             />
-            <ImageBackground source={imagesPath.chat_bg} resizeMode="cover" style={styles.image}></ImageBackground>
-        </View>
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: null,
-        height: null,
     },
     tab_bar: {
         justifyContent: "space-between",
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: '#008069',
-        marginTop: moderateVerticalScale(50),
+        marginTop: moderateVerticalScale(25),
         paddingHorizontal: moderateScale(15),
         flex: 1,
     },
     tab_barcontainer: {
         backgroundColor: '#008069',
-        height: verticalScale(150),
+        height: verticalScale(125),
     },
     icons_container: {
         flexDirection: "row",
@@ -137,6 +139,7 @@ const styles = StyleSheet.create({
     image: {
         flex: 1,
         resizeMode: 'cover',
+        justifyContent: 'center',
     },
 })
 
