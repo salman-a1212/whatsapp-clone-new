@@ -1,11 +1,12 @@
 import imagesPath from '@/src/constants/imagesPath';
 import React, { useState } from 'react'
 import { View, useWindowDimensions, StyleSheet, Text, Pressable, Image } from 'react-native';
-import { moderateScale, moderateVerticalScale, verticalScale } from 'react-native-size-matters';
+import { moderateScale, moderateVerticalScale, scale, verticalScale } from 'react-native-size-matters';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { Menu, MenuItem } from 'react-native-material-menu';
 import Entypo from '@expo/vector-icons/Entypo';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 
 const Main = () => {
@@ -46,7 +47,7 @@ const Main = () => {
                     <Menu
                         visible={visible}
                         anchor={<Pressable onPress={showMenu}>
-                            <Entypo name="dots-three-vertical" size={24} color="white" />
+                            <Entypo name="dots-three-vertical" size={24} color="white" style={{ paddingStart: moderateScale(15) }} />
                         </Pressable>}
                         onRequestClose={hideMenu}
                     >
@@ -56,11 +57,16 @@ const Main = () => {
                     </Menu>
                 </View>
             </View>
-            <TabBar
-                {...props}
-                indicatorStyle={{ backgroundColor: 'white' }}
-                style={{ backgroundColor: '#008069', elevation: 0 }}
-            />
+            <View style={styles.tabbar_wrapper}>
+                <MaterialIcons name="camera-alt" size={24} color="white" style={{ paddingStart: moderateScale(10) }} />
+                <View style={styles.tabbar}>
+                    <TabBar
+                        {...props}
+                        indicatorStyle={{ backgroundColor: 'white' }}
+                        style={{ backgroundColor: '#008069', elevation: 0 }}
+                    />
+                </View>
+            </View>
         </View>
     );
 
@@ -110,7 +116,17 @@ const styles = StyleSheet.create({
         fontSize: moderateScale(20),
         color: "white",
         fontWeight: "700",
+    },
+    tabbar_wrapper: {
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        alignItems: "center",
+    },
+    tabbar: {
+        width: scale(300),
+        marginStart: moderateScale(20)
     }
+
 })
 
 export default Main
