@@ -59,7 +59,7 @@ const Main = () => {
             <TabBar
                 {...props}
                 indicatorStyle={{ backgroundColor: 'white' }}
-                style={{ backgroundColor: '#008069' }}
+                style={{ backgroundColor: '#008069', elevation: 0 }}
             />
         </View>
     );
@@ -93,8 +93,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: '#008069',
-        marginVertical: moderateVerticalScale(30),
-        paddingHorizontal: moderateScale(20),
+        marginTop: moderateVerticalScale(50),
+        paddingHorizontal: moderateScale(15),
+        flex: 1,
     },
     tab_barcontainer: {
         backgroundColor: '#008069',
