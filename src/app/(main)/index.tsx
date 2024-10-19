@@ -1,9 +1,11 @@
 import imagesPath from '@/src/constants/imagesPath';
 import React, { useState } from 'react'
 import { View, useWindowDimensions, StyleSheet, Text, Pressable, Image } from 'react-native';
-import { verticalScale } from 'react-native-size-matters';
+import { moderateScale, moderateVerticalScale, verticalScale } from 'react-native-size-matters';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { Menu, MenuItem } from 'react-native-material-menu';
+import Entypo from '@expo/vector-icons/Entypo';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 
 const Main = () => {
@@ -36,22 +38,28 @@ const Main = () => {
     const renderTabBar = props => (
         <View style={styles.tab_barcontainer}>
             <View style={styles.tab_bar}>
-                <Text>WhatsApp</Text>
-                <Pressable><Image source={imagesPath.search_icon} resizeMode='contain' /></Pressable>
-                <Menu
-                    visible={visible}
-                    anchor={<Pressable onPress={showMenu}><Image source={imagesPath.kebab_menu} resizeMode='contain' /></Pressable>}
-                    onRequestClose={hideMenu}
-                >
-                    <MenuItem onPress={hideMenu}>Menu item 1</MenuItem>
-                    <MenuItem onPress={hideMenu}>Menu item 2</MenuItem>
-                    <MenuItem onPress={hideMenu}>Menu item 3</MenuItem>
-                </Menu>
+                <Text style={styles.tab_title}>WhatsApp</Text>
+                <View style={styles.icons_container}>
+                    <Pressable>
+                        <AntDesign name="search1" size={24} color="white" />
+                    </Pressable>
+                    <Menu
+                        visible={visible}
+                        anchor={<Pressable onPress={showMenu}>
+                            <Entypo name="dots-three-vertical" size={24} color="white" />
+                        </Pressable>}
+                        onRequestClose={hideMenu}
+                    >
+                        <MenuItem onPress={hideMenu}>Menu item 1</MenuItem>
+                        <MenuItem onPress={hideMenu}>Menu item 2</MenuItem>
+                        <MenuItem onPress={hideMenu}>Menu item 3</MenuItem>
+                    </Menu>
+                </View>
             </View>
             <TabBar
                 {...props}
                 indicatorStyle={{ backgroundColor: 'white' }}
-                style={{ backgroundColor: '#008069', height: verticalScale(100), justifyContent: "center" }}
+                style={{ backgroundColor: '#008069' }}
             />
         </View>
     );
@@ -84,12 +92,23 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: '#008069'
+        backgroundColor: '#008069',
+        marginVertical: moderateVerticalScale(30),
+        paddingHorizontal: moderateScale(20),
     },
     tab_barcontainer: {
         backgroundColor: '#008069',
-        height: verticalScale(100),
-        justifyContent: "flex-start"
+        height: verticalScale(150),
+        justifyContent: "flex-start",
+    },
+    icons_container: {
+        flexDirection: "row",
+        justifyContent: "flex-end",
+    },
+    tab_title: {
+        fontSize: moderateScale(20),
+        color: "white",
+        fontWeight: "700",
     }
 })
 
