@@ -6,4 +6,5 @@ export default {
     back_arrow: require("@/src/assets/images/BackArrow.png"),
     error_icon: require("@/src/assets/images/error.png"),
     search_icon: require("@/src/assets/images/Search.png"),
+    chat_bg: require("@/src/assets/images/chatbg.png"),
 }

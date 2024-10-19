@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { View, useWindowDimensions, StyleSheet, Text, Pressable, Image, TouchableOpacity } from 'react-native';
+import { View, useWindowDimensions, StyleSheet, Text, Pressable, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import { moderateScale, moderateVerticalScale, scale, verticalScale } from 'react-native-size-matters';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { Menu, MenuItem } from 'react-native-material-menu';
 import Entypo from '@expo/vector-icons/Entypo';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import imagesPath from '@/src/constants/imagesPath';
 
 
 const Main = () => {
@@ -15,6 +16,8 @@ const Main = () => {
     const hideMenu = () => setVisible(false);
 
     const showMenu = () => setVisible(true);
+
+    const image = { uri: 'https://legacy.reactjs.org/logo-og.png' };
 
     const FirstRoute = () => (
         <View style={{ flex: 1, backgroundColor: '#fff' }} />
@@ -81,19 +84,24 @@ const Main = () => {
     ]);
 
     return (
-        <TabView
-            navigationState={{ index, routes }}
-            renderScene={renderScene}
-            onIndexChange={setIndex}
-            initialLayout={{ width: layout.width }}
-            renderTabBar={renderTabBar}
-        />
+        <View style={styles.container}>
+            <TabView
+                navigationState={{ index, routes }}
+                renderScene={renderScene}
+                onIndexChange={setIndex}
+                initialLayout={{ width: layout.width }}
+                renderTabBar={renderTabBar}
+            />
+            <ImageBackground source={imagesPath.chat_bg} resizeMode="cover" style={styles.image}></ImageBackground>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#fff"
+        flex: 1,
+        width: null,
+        height: null,
     },
     tab_bar: {
         justifyContent: "space-between",
@@ -107,7 +115,6 @@ const styles = StyleSheet.create({
     tab_barcontainer: {
         backgroundColor: '#008069',
         height: verticalScale(150),
-        justifyContent: "flex-start",
     },
     icons_container: {
         flexDirection: "row",
@@ -125,9 +132,12 @@ const styles = StyleSheet.create({
     },
     tabbar: {
         width: scale(300),
-        marginStart: moderateScale(20)
-    }
-
+        marginStart: moderateScale(13)
+    },
+    image: {
+        flex: 1,
+        resizeMode: 'cover',
+    },
 })
 
 export default Main
