@@ -1,6 +1,5 @@
-import imagesPath from '@/src/constants/imagesPath';
 import React, { useState } from 'react'
-import { View, useWindowDimensions, StyleSheet, Text, Pressable, Image } from 'react-native';
+import { View, useWindowDimensions, StyleSheet, Text, Pressable, Image, TouchableOpacity } from 'react-native';
 import { moderateScale, moderateVerticalScale, scale, verticalScale } from 'react-native-size-matters';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { Menu, MenuItem } from 'react-native-material-menu';
@@ -58,7 +57,9 @@ const Main = () => {
                 </View>
             </View>
             <View style={styles.tabbar_wrapper}>
-                <MaterialIcons name="camera-alt" size={24} color="white" style={{ paddingStart: moderateScale(10) }} />
+                <TouchableOpacity activeOpacity={0.8}>
+                    <MaterialIcons name="camera-alt" size={24} color="white" style={{ paddingStart: moderateScale(10) }} />
+                </TouchableOpacity>
                 <View style={styles.tabbar}>
                     <TabBar
                         {...props}
