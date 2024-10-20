@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     button_text: {
         fontSize: moderateScale(14),
         color: "#fff",
-    }
+    },
 })
 
 export default ButtonComp

@@ -8,6 +8,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import imagesPath from '@/src/constants/imagesPath';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import ButtonComp from '@/src/components/ButtonComp';
 
 
 const Main = () => {
@@ -19,20 +20,29 @@ const Main = () => {
     const showMenu = () => setVisible(true);
 
     const FirstRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <View style={{ flex: 1, backgroundColor: '#fff', alignItems: "center", justifyContent: "center", }}>
             <ImageBackground source={imagesPath.chat_bg} resizeMode="cover" style={styles.image}></ImageBackground>
+            <Image source={imagesPath.nochatlogo} resizeMode='contain' style={styles.nochat_logo} />
+            <Text style={styles.nochat_text}>You haven’t chat yet</Text>
+            <ButtonComp title="Start Chatting" style={[styles.start_chatbtn, styles.chatbtn_text]} />
         </View>
     );
 
     const SecondRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <View style={{ flex: 1, backgroundColor: '#fff', alignItems: "center", justifyContent: "center", }}>
             <ImageBackground source={imagesPath.chat_bg} resizeMode="cover" style={styles.image}></ImageBackground>
+            <Image source={imagesPath.nochatlogo} resizeMode='contain' style={styles.nochat_logo} />
+            <Text style={styles.nochat_text}>You haven’t chat yet</Text>
+            <ButtonComp title="Start Chatting" style={[styles.start_chatbtn, styles.chatbtn_text]} />
         </View>
     );
 
     const ThirdRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff' }}>
+        <View style={{ flex: 1, backgroundColor: '#fff', alignItems: "center", justifyContent: "center", }}>
             <ImageBackground source={imagesPath.chat_bg} resizeMode="cover" style={styles.image}></ImageBackground>
+            <Image source={imagesPath.nochatlogo} resizeMode='contain' style={styles.nochat_logo} />
+            <Text style={styles.nochat_text}>You haven’t chat yet</Text>
+            <ButtonComp title="Start Chatting" style={[styles.start_chatbtn, styles.chatbtn_text]} />
         </View>
     );
 
@@ -104,6 +114,8 @@ const Main = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
     },
     tab_bar: {
         justifyContent: "space-between",
@@ -141,6 +153,28 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
         justifyContent: 'center',
     },
+    nochat_logo: {
+        width: scale(100),
+        marginVertical: moderateVerticalScale(40),
+    },
+    nochat_text: {
+        fontSize: moderateScale(32),
+        marginBottom: moderateScale(20),
+    },
+    start_chatbtn: {
+        width: scale(180),
+        backgroundColor: "#0CCC83",
+        color: "#fff",
+        borderRadius: moderateScale(30),
+        paddingVertical: moderateVerticalScale(15),
+        fontSize: moderateScale(20),
+        fontWeight: "600",
+        marginBottom: moderateScale(80),
+    },
+    chatbtn_text: {
+        fontSize: moderateScale(20),
+        fontWeight: "600",
+    }
 })
 
 export default Main
