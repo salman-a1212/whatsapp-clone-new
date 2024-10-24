@@ -16,7 +16,7 @@ const ChatList = () => {
     const chatData = [
         {
             id: "1",
-            img: "",
+            img: imagesPath.chat_person1,
             person: "Aron",
             msg: "Lorem ipsum dolor sit",
             time: "5:27 am",
@@ -25,34 +25,34 @@ const ChatList = () => {
         },
         {
             id: "2",
-            img: "",
+            img: imagesPath.chat_person2,
             person: "Abelson",
             msg: "Curabitur finibus dictum nisl, ac sagitt...",
             time: "Yesterday",
-            unread_items: "",
+            unread_items: "4",
 
         },
         {
             id: "3",
-            img: "",
+            img: imagesPath.chat_person3,
             person: "Cathor",
             msg: "Photo",
             time: "5:27 am",
-            unread_items: "",
+            unread_items: "4",
 
         },
         {
             id: "4",
-            img: "",
+            img: imagesPath.chat_person4,
             person: "Steven",
             msg: "Document.pdf (1 page)",
             time: "23/06/2022",
-            unread_items: "",
+            unread_items: "4",
 
         },
         {
             id: "5",
-            img: "",
+            img: imagesPath.chat_person5,
             person: "Aron",
             msg: "Lorem ipsum dolor sit",
             time: "5:27 am",
@@ -61,7 +61,7 @@ const ChatList = () => {
         },
         {
             id: "6",
-            img: "",
+            img: imagesPath.chat_person6,
             person: "Aron",
             msg: "Lorem ipsum dolor sit",
             time: "5:27 am",
@@ -70,7 +70,7 @@ const ChatList = () => {
         },
         {
             id: "7",
-            img: "",
+            img: imagesPath.chat_person7,
             person: "Aron",
             msg: "Lorem ipsum dolor sit",
             time: "5:27 am",
@@ -79,7 +79,7 @@ const ChatList = () => {
         },
         {
             id: "8",
-            img: "",
+            img: imagesPath.chat_person8,
             person: "Aron",
             msg: "Lorem ipsum dolor sit",
             time: "5:27 am",
@@ -95,11 +95,35 @@ const ChatList = () => {
     const showMenu = () => setVisible(true);
 
     const FirstRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff', alignItems: "flex-start", justifyContent: "flex-start", }}>
+        <View style={{ flex: 1, backgroundColor: '#fff', alignItems: "flex-start", justifyContent: "flex-start" }}>
             <FlatList
                 data={chatData}
-                renderItem={({ item }) => <View>
-                    <Text>{item.person}</Text>
+                renderItem={({ item }) => <View style={styles.chatlist_container}>
+                    <View style={styles.chatimg_container}>
+                        <Image source={item.img} resizeMode='contain' style={{ marginEnd: moderateScale(10) }} />
+                        <View style={styles.chattext_container}>
+                            <Text>{item.person}</Text>
+                            <View style={styles.msg_container}>
+                                <Image source={imagesPath.blue_tick} resizeMode='contain' style={{ paddingStart: moderateScale(10) }} />
+                                <Text>{item.msg}</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.chattime_container}>
+                        <Text style={{ paddingEnd: moderateScale(50) }}>{item.time}</Text>
+                        <View style={{
+                            backgroundColor: "#036A01",
+                            width: moderateScale(22),
+                            height: moderateScale(22),
+                            alignItems: "center",
+                            justifyContent: "center",
+                            borderRadius: moderateScale(22),
+                        }}>
+                            <Text style={{ color: "#000" }}>
+                                {item.unread_items}
+                            </Text>
+                        </View>
+                    </View>
                 </View>}
                 keyExtractor={item => item.id}
             />
@@ -107,20 +131,74 @@ const ChatList = () => {
     );
 
     const SecondRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff', alignItems: "center", justifyContent: "center", }}>
-            <ImageBackground source={imagesPath.chat_bg} resizeMode="cover" style={styles.image}></ImageBackground>
-            <Image source={imagesPath.nochatlogo} resizeMode='contain' style={styles.nochat_logo} />
-            <Text style={styles.nochat_text}>You haven’t chat yet</Text>
-            <ButtonComp title="Start Chatting" style={[styles.start_chatbtn, styles.chatbtn_text]} />
+        <View style={{ flex: 1, backgroundColor: '#fff', alignItems: "flex-start", justifyContent: "flex-start" }}>
+            <FlatList
+                data={chatData}
+                renderItem={({ item }) => <View style={styles.chatlist_container}>
+                    <View style={styles.chatimg_container}>
+                        <Image source={item.img} resizeMode='contain' style={{ marginEnd: moderateScale(10) }} />
+                        <View style={styles.chattext_container}>
+                            <Text>{item.person}</Text>
+                            <View style={styles.msg_container}>
+                                <Image source={imagesPath.blue_tick} resizeMode='contain' style={{ paddingStart: moderateScale(10) }} />
+                                <Text>{item.msg}</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.chattime_container}>
+                        <Text style={{ paddingEnd: moderateScale(50) }}>{item.time}</Text>
+                        <View style={{
+                            backgroundColor: "#036A01",
+                            width: moderateScale(22),
+                            height: moderateScale(22),
+                            alignItems: "center",
+                            justifyContent: "center",
+                            borderRadius: moderateScale(22),
+                        }}>
+                            <Text style={{ color: "#000" }}>
+                                {item.unread_items}
+                            </Text>
+                        </View>
+                    </View>
+                </View>}
+                keyExtractor={item => item.id}
+            />
         </View>
     );
 
     const ThirdRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff', alignItems: "center", justifyContent: "center", }}>
-            <ImageBackground source={imagesPath.chat_bg} resizeMode="cover" style={styles.image}></ImageBackground>
-            <Image source={imagesPath.nochatlogo} resizeMode='contain' style={styles.nochat_logo} />
-            <Text style={styles.nochat_text}>You haven’t chat yet</Text>
-            <ButtonComp title="Start Chatting" style={[styles.start_chatbtn, styles.chatbtn_text]} />
+        <View style={{ flex: 1, backgroundColor: '#fff', alignItems: "flex-start", justifyContent: "flex-start" }}>
+            <FlatList
+                data={chatData}
+                renderItem={({ item }) => <View style={styles.chatlist_container}>
+                    <View style={styles.chatimg_container}>
+                        <Image source={item.img} resizeMode='contain' style={{ marginEnd: moderateScale(10) }} />
+                        <View style={styles.chattext_container}>
+                            <Text>{item.person}</Text>
+                            <View style={styles.msg_container}>
+                                <Image source={imagesPath.blue_tick} resizeMode='contain' style={{ paddingStart: moderateScale(10) }} />
+                                <Text>{item.msg}</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.chattime_container}>
+                        <Text style={{ paddingEnd: moderateScale(50) }}>{item.time}</Text>
+                        <View style={{
+                            backgroundColor: "#036A01",
+                            width: moderateScale(22),
+                            height: moderateScale(22),
+                            alignItems: "center",
+                            justifyContent: "center",
+                            borderRadius: moderateScale(22),
+                        }}>
+                            <Text style={{ color: "#000" }}>
+                                {item.unread_items}
+                            </Text>
+                        </View>
+                    </View>
+                </View>}
+                keyExtractor={item => item.id}
+            />
         </View>
     );
 
@@ -161,6 +239,21 @@ const ChatList = () => {
                         {...props}
                         indicatorStyle={{ backgroundColor: 'white' }}
                         style={{ backgroundColor: '#008069', elevation: 0 }}
+                        renderIcon={({ route, focused, color, }) => (
+                            <View style={{ flexDirection: "row" }}>
+                                <View>
+                                    <MaterialIcons
+                                        name={route.title === "CHATS" ? 'mark-chat-unread' : ""}
+                                        color={color}
+                                    />
+                                </View>
+                                <View>
+                                    <Entypo name={route.title === "STATUS" ? 'dot-single' : ""}
+                                        color={color}
+                                    />
+                                </View>
+                            </View>
+                        )}
                     />
                 </View>
             </View>
@@ -171,7 +264,12 @@ const ChatList = () => {
 
     const [index, setIndex] = useState(0);
     const [routes] = useState([
-        { key: 'first', title: 'CHATS' },
+        {
+            key: 'first',
+            title: 'CHATS',
+            icon: 'mark-chat-unread'
+
+        },
         { key: 'second', title: 'STATUS' },
         { key: 'third', title: 'CALLS' },
     ]);
@@ -184,7 +282,13 @@ const ChatList = () => {
                 onIndexChange={setIndex}
                 initialLayout={{ width: layout.width }}
                 renderTabBar={renderTabBar}
+                style={styles.tabview}
             />
+            <View style={styles.newchat_container}>
+                <TouchableOpacity activeOpacity={0.8}>
+                    <Image source={imagesPath.newchat_icon} resizeMode='contain' />
+                </TouchableOpacity>
+            </View>
         </SafeAreaView>
     )
 }
@@ -207,6 +311,7 @@ const styles = StyleSheet.create({
     tab_barcontainer: {
         backgroundColor: '#008069',
         height: verticalScale(125),
+        paddingHorizontal: moderateScale(5),
     },
     icons_container: {
         flexDirection: "row",
@@ -224,7 +329,7 @@ const styles = StyleSheet.create({
     },
     tabbar: {
         width: scale(300),
-        marginStart: moderateScale(13)
+        marginStart: moderateScale(13),
     },
     image: {
         flex: 1,
@@ -252,7 +357,43 @@ const styles = StyleSheet.create({
     chatbtn_text: {
         fontSize: moderateScale(20),
         fontWeight: "600",
+    },
+    chatlist_container: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingHorizontal: moderateScale(5),
+        marginBottom: moderateScale(20)
+    },
+    chattext_container: {
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+    },
+    chattime_container: {
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+    },
+    chatimg_container: {
+        justifyContent: "flex-start",
+        alignItems: "center",
+        flexDirection: "row",
+        paddingTop: moderateVerticalScale(15),
+    },
+    msg_container: {
+        flexDirection: "row",
+        alignItems: "center",
+        paddingEnd: moderateScale(10),
+    },
+    tabview: {
+    },
+    newchat_container: {
+        backgroundColor: "#fff",
+        justifyContent: "flex-end",
+        position: "absolute",
+        top: "93%",
+        left: "77%",
     }
+
 })
 
 
