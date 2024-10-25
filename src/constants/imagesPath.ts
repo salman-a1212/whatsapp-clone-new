@@ -18,5 +18,5 @@ export default {
     chat_person8: require("@/src/assets/images/chat-person8.png"),
     blue_tick: require("@/src/assets/images/blue-tick.png"),
     newchat_icon: require("@/src/assets/images/newchat_icon.png"),
-    accountholder_status: require("@/src/assets/images/accountholder_status.png"),
+    accountholder_status: require("@/src/assets/images/accountholder-satus.png"),
 }

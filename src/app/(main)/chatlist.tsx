@@ -86,6 +86,72 @@ const ChatList = () => {
             unread_items: "4",
 
         },
+        {
+            id: "9",
+            img: imagesPath.accountholder_status,
+            person: "Aron",
+            msg: "Lorem ipsum dolor sit",
+            time: "5:27 am",
+            unread_items: "4",
+
+        },
+    ]
+
+    const statusData = [
+        {
+            id: "1",
+            img: imagesPath.chat_person1,
+            person: "My status",
+            msg: "Tap to add status update",
+        },
+        {
+            id: "2",
+            img: imagesPath.chat_person2,
+            person: "Abelson",
+            msg: "Curabitur finibus dictum nisl, ac sagitt...",
+        },
+        {
+            id: "3",
+            img: imagesPath.chat_person3,
+            person: "Cathor",
+            msg: "Photo",
+        },
+        {
+            id: "4",
+            img: imagesPath.chat_person4,
+            person: "Steven",
+            msg: "Document.pdf (1 page)",
+        },
+        {
+            id: "5",
+            img: imagesPath.chat_person5,
+            person: "Aron",
+            msg: "Lorem ipsum dolor sit",
+        },
+        {
+            id: "6",
+            img: imagesPath.chat_person6,
+            person: "Aron",
+            msg: "Lorem ipsum dolor sit",
+        },
+        {
+            id: "7",
+            img: imagesPath.chat_person7,
+            person: "Aron",
+            msg: "Lorem ipsum dolor sit",
+        },
+        {
+            id: "8",
+            img: imagesPath.chat_person8,
+            person: "Aron",
+            msg: "Lorem ipsum dolor sit",
+        },
+        {
+            id: "9",
+            img: imagesPath.accountholder_status,
+            person: "Aron",
+            msg: "Lorem ipsum dolor sit",
+        },
     ]
 
     const [visible, setVisible] = useState(false);
@@ -133,14 +199,23 @@ const ChatList = () => {
     const SecondRoute = () => (
         <View style={{ flex: 1, backgroundColor: '#fff', alignItems: "flex-start", justifyContent: "flex-start" }}>
             <FlatList
-                data={chatData}
+                data={statusData}
                 renderItem={({ item }) => <View style={styles.chatlist_container}>
                     <View style={styles.chatimg_container}>
                         <Image source={item.img} resizeMode='contain' style={{ marginEnd: moderateScale(10) }} />
+                        {item.id === "1" ? <View style={styles.addstatus_icon}>
+                            <AntDesign name="pluscircle" size={24} color="#008069" />
+                        </View>
+                            :
+                            ""
+                        }
                         <View style={styles.chattext_container}>
                             <Text>{item.person}</Text>
                             <View style={styles.msg_container}>
-                                <Image source={imagesPath.blue_tick} resizeMode='contain' style={{ paddingStart: moderateScale(10) }} />
+                                {item.id === "1" ? ""
+                                    : <Image source={imagesPath.blue_tick} resizeMode='contain' style={{ paddingStart: moderateScale(10) }} />
+
+                                }
                                 <Text>{item.msg}</Text>
                             </View>
                         </View>
@@ -378,6 +453,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flexDirection: "row",
         paddingTop: moderateVerticalScale(15),
+        position: "relative",
     },
     msg_container: {
         flexDirection: "row",
@@ -392,6 +468,12 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: "93%",
         left: "77%",
+    },
+    addstatus_icon: {
+        position: "absolute",
+        top: "90%",
+        left: "15%",
+        zIndex: 1,
     }
 
 })
