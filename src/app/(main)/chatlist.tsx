@@ -197,47 +197,40 @@ const ChatList = () => {
     );
 
     const SecondRoute = () => (
-        <View style={{ flex: 1, backgroundColor: '#fff', alignItems: "flex-start", justifyContent: "flex-start" }}>
-            <FlatList
-                data={statusData}
-                renderItem={({ item }) => <View style={styles.chatlist_container}>
-                    <View style={styles.chatimg_container}>
-                        <Image source={item.img} resizeMode='contain' style={{ marginEnd: moderateScale(10) }} />
-                        {item.id === "1" ? <View style={styles.addstatus_icon}>
-                            <AntDesign name="pluscircle" size={24} color="#008069" />
-                        </View>
-                            :
-                            ""
-                        }
-                        <View style={styles.chattext_container}>
-                            <Text>{item.person}</Text>
-                            <View style={styles.msg_container}>
-                                {item.id === "1" ? ""
-                                    : <Image source={imagesPath.blue_tick} resizeMode='contain' style={{ paddingStart: moderateScale(10) }} />
-
+        <View style={{ flex: 1, backgroundColor: '#fff', alignItems: "flex-start", justifyContent: "flex-start", flexDirection: "column" }}>
+            <View style={{ flex: 1, backgroundColor: '#fff', alignItems: "flex-start", justifyContent: "flex-start", flexDirection: "column" }}>
+                <FlatList
+                    data={statusData}
+                    renderItem={({ item }) => <View style={{ flex: 1, flexDirection: "column" }}>
+                        <View style={styles.chatlist_container}>
+                            <View style={styles.chatimg_container}>
+                                <Image source={item.img} resizeMode='contain' style={{ marginEnd: moderateScale(10) }} />
+                                {item.id === "1" ? <View style={styles.addstatus_icon}>
+                                    <AntDesign name="pluscircle" size={24} color="#008069" />
+                                </View>
+                                    :
+                                    ""
                                 }
-                                <Text>{item.msg}</Text>
+                                <View style={styles.chattext_container}>
+                                    <Text>{item.person}</Text>
+                                    <View style={styles.msg_container}>
+                                        {item.id === "1" ? ""
+                                            : <Image source={imagesPath.blue_tick} resizeMode='contain' style={{ paddingStart: moderateScale(10) }} />
+
+                                        }
+                                        <Text>{item.msg}</Text>
+                                    </View>
+                                </View>
                             </View>
                         </View>
-                    </View>
-                    <View style={styles.chattime_container}>
-                        <Text style={{ paddingEnd: moderateScale(50) }}>{item.time}</Text>
-                        <View style={{
-                            backgroundColor: "#036A01",
-                            width: moderateScale(22),
-                            height: moderateScale(22),
-                            alignItems: "center",
-                            justifyContent: "center",
-                            borderRadius: moderateScale(22),
-                        }}>
-                            <Text style={{ color: "#000" }}>
-                                {item.unread_items}
-                            </Text>
-                        </View>
-                    </View>
-                </View>}
-                keyExtractor={item => item.id}
-            />
+
+                    </View>}
+                    keyExtractor={item => item.id}
+                />
+                <View style={{ marginVertical: moderateVerticalScale(20), flexDirection: "column", }}>
+                    <Text>Recent Updates</Text>
+                </View>
+            </View>
         </View>
     );
 
