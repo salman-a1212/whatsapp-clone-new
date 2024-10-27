@@ -9,6 +9,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import imagesPath from '@/src/constants/imagesPath';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonComp from '@/src/components/ButtonComp';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 
 const ChatList = () => {
@@ -345,10 +346,17 @@ const ChatList = () => {
             key: 'first',
             title: 'CHATS',
             icon: 'mark-chat-unread'
+        },
+        {
+            key: 'second',
+            title: 'STATUS',
+            icon: 'camera',
 
         },
-        { key: 'second', title: 'STATUS' },
-        { key: 'third', title: 'CALLS' },
+        {
+            key: 'third',
+            title: 'CALLS'
+        },
     ]);
 
     return (
@@ -362,11 +370,14 @@ const ChatList = () => {
                 style={styles.tabview}
             />
             <View style={styles.newchat_container}>
-                <TouchableOpacity activeOpacity={0.8} style={{ marginVertical: moderateVerticalScale(10) }}>
-                    <Image source={imagesPath.edit_status} resizeMode='contain' />
-                </TouchableOpacity>
+                {routes[0].key === "second" ?
+                    <TouchableOpacity activeOpacity={0.8} style={{ marginVertical: moderateVerticalScale(10) }}>
+                        <Image source={imagesPath.edit_status} resizeMode='contain' />
+                    </TouchableOpacity> : ""
+
+                }
                 <TouchableOpacity activeOpacity={0.8}>
-                    <Image source={imagesPath.take_pic} resizeMode='contain' />
+                    <Image source={routes[1].key === "first" ? imagesPath.newchat_icon : imagesPath.take_pic} resizeMode='contain' />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
