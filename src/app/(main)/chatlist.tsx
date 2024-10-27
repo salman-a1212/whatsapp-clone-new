@@ -220,17 +220,18 @@ const ChatList = () => {
 
                                         }
                                         <Text>{item.msg}</Text>
-                                        {
-                                            item.id === "1" ?
-                                                <View style={{ marginVertical: moderateVerticalScale(20), display: "flex", flexDirection: "column" }}>
-                                                    <Text>Recent Updates</Text>
-                                                </View> : item.id === "4" ?
-                                                    <View style={{ marginVertical: moderateVerticalScale(20), display: "flex", flexDirection: "column" }}>
-                                                        <Text>Viewed Updates</Text>
-                                                    </View> : ""
 
-                                        }
                                     </View>
+                                    {
+                                        item.id === "1" ?
+                                            <View style={{ marginVertical: moderateVerticalScale(20), display: "flex", flexDirection: "column" }}>
+                                                <Text>Recent Updates</Text>
+                                            </View> : item.id === "4" ?
+                                                <View style={{ marginVertical: moderateVerticalScale(20), display: "flex", flexDirection: "column" }}>
+                                                    <Text>Viewed Updates</Text>
+                                                </View> : ""
+
+                                    }
                                 </View>
 
                             </View>
@@ -466,9 +467,9 @@ const styles = StyleSheet.create({
     },
     chatimg_container: {
         justifyContent: "flex-start",
-        alignItems: "center",
+        alignItems: "flex-start",
         flexDirection: "row",
-        paddingTop: moderateVerticalScale(15),
+        paddingVertical: moderateVerticalScale(15),
         position: "relative",
     },
     msg_container: {
@@ -488,7 +489,7 @@ const styles = StyleSheet.create({
     },
     addstatus_icon: {
         position: "absolute",
-        top: "90%",
+        top: "50%",
         left: "15%",
         zIndex: 1,
     }
