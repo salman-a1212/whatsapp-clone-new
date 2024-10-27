@@ -362,8 +362,11 @@ const ChatList = () => {
                 style={styles.tabview}
             />
             <View style={styles.newchat_container}>
+                <TouchableOpacity activeOpacity={0.8} style={{ marginVertical: moderateVerticalScale(10) }}>
+                    <Image source={imagesPath.edit_status} resizeMode='contain' />
+                </TouchableOpacity>
                 <TouchableOpacity activeOpacity={0.8}>
-                    <Image source={imagesPath.newchat_icon} resizeMode='contain' />
+                    <Image source={imagesPath.take_pic} resizeMode='contain' />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -469,7 +472,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         justifyContent: "flex-end",
         position: "absolute",
-        top: "93%",
+        top: "80%",
         left: "77%",
     },
     addstatus_icon: {

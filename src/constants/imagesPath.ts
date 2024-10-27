@@ -19,4 +19,6 @@ export default {
     blue_tick: require("@/src/assets/images/blue-tick.png"),
     newchat_icon: require("@/src/assets/images/newchat_icon.png"),
     accountholder_status: require("@/src/assets/images/accountholder-satus.png"),
+    edit_status: require("@/src/assets/images/edit_status.png"),
+    take_pic: require("@/src/assets/images/take_pic.png"),
 }
