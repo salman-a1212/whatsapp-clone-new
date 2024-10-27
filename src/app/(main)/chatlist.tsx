@@ -219,17 +219,26 @@ const ChatList = () => {
 
                                         }
                                         <Text>{item.msg}</Text>
+                                        {
+                                            item.id === "1" ?
+                                                <View style={{ marginVertical: moderateVerticalScale(20), display: "flex", flexDirection: "column" }}>
+                                                    <Text>Recent Updates</Text>
+                                                </View> : item.id === "4" ?
+                                                    <View style={{ marginVertical: moderateVerticalScale(20), display: "flex", flexDirection: "column" }}>
+                                                        <Text>Viewed Updates</Text>
+                                                    </View> : ""
+
+                                        }
                                     </View>
                                 </View>
+
                             </View>
                         </View>
 
                     </View>}
                     keyExtractor={item => item.id}
                 />
-                <View style={{ marginVertical: moderateVerticalScale(20), flexDirection: "column", }}>
-                    <Text>Recent Updates</Text>
-                </View>
+
             </View>
         </View>
     );
@@ -449,8 +458,9 @@ const styles = StyleSheet.create({
         position: "relative",
     },
     msg_container: {
-        flexDirection: "row",
-        alignItems: "center",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        justifyContent: "flex-start",
         paddingEnd: moderateScale(10),
     },
     tabview: {
