@@ -21,4 +21,6 @@ export default {
     accountholder_status: require("@/src/assets/images/accountholder-satus.png"),
     edit_status: require("@/src/assets/images/edit_status.png"),
     take_pic: require("@/src/assets/images/take_pic.png"),
+    received_call: require("@/src/assets/images/received_callicon.png"),
+    video_icon: require("@/src/assets/images/video-callicon.png"),
 }
